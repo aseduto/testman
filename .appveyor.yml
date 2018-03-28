@@ -195,7 +195,7 @@ build_script:
 # scripts to run before tests
 before_test:
     #- git clone https://github.com/aseduto/minicover.git
-    - git clonehttps://github.com/lucaslorentz/minicover.git
+    - git clone https://github.com/lucaslorentz/minicover.git
     - cd minicover
     #- git checkout coverall
     - git checkout coveralls
