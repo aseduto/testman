@@ -220,7 +220,7 @@ test_script:
     #- pwsh: ls env: | ? {-Not ($_.name -match 'coverall')}
     - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll report --workdir ./ --threshold 50
     #- dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallreport --id %APPVEYOR_REPO_COMMIT% --servicename appveyor --output coverall.json --job %APPVEYOR_BUILD_NUMBER% --token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --post https://coveralls.io/api/v1/jobs --threshold 50 --msg "%APPVEYOR_REPO_COMMIT_MESSAGE%"
-    - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --threshold 50 --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
+    - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
 
 # to disable automatic tests
 #test: off
