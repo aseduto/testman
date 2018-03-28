@@ -211,7 +211,7 @@ test_script:
     #- dotnet minicover instrument --workdir ../ --assemblies src/**/out/**/*.dll --sources src/**/*.cs
     #- dotnet minicover reset
     #- cd ..
-    - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll instrument --workdir ./ --assemblies src/**/out/**/*.dll --sources src/**/*.cs
+    - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll instrument --workdir ./ --assemblies ./out/**/*.dll --sources *.cs
     - dotnet  ./out/depsman.dll  
     #- cd tools
     #- dotnet minicover report --workdir ../ --threshold 90
