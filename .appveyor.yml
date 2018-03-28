@@ -88,7 +88,7 @@ environment:
   my_var1: value1
   my_var2: value2
   coverall:
-    secure: 2dkcctTsGqQPGWhvydzFChjctp33OSEkfclaRYUDWkmDIV0uxgSZ4j3rvHMZakm3
+    secure: 5ek2mNQ+B0FBBBizf4VQnJ5d131L13D8PoMUuujXI9BwMz0yxBR9yxG+iTekt2Ku
   
   # this is how to set encrypted variable. Go to "Encrypt data" page in account menu to encrypt data.
   #my_secure_var1:
