@@ -10,6 +10,7 @@ image: Ubuntu
 build: off
 
 environment:
+  regex: "\| Program\.cs \|   19  \|       10      \|   52\.\d+\s*%\s*\|"
   coverall:
     secure: 5ek2mNQ+B0FBBBizf4VQnJ5d131L13D8PoMUuujXI9BwMz0yxBR9yxG+iTekt2Ku
 
@@ -61,7 +62,7 @@ test_script:
     #- cd tools
     #- dotnet minicover report --workdir ../ --threshold 90
     #- pwsh: ls env: | ? {-Not ($_.name -match 'coverall')}
-    - pwsh: $ll = dotnet ./minicover/src/MiniCover/out/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   19  \|        10      \|   52\.\d+ %  \|"); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover Master" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
+    - pwsh: $ll = dotnet ./minicover/src/MiniCover/out/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, $env:regex); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover Master" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
     #- dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
     - pwsh: $o = "-------------------"; $o | oh
     - pwsh: ls; remove-item "coverage.*"; remove-item minicover -force -recurse;
@@ -75,7 +76,7 @@ test_script:
     - dotnet  ./out2/depsman.dll
     - ls
     #- pwsh: $ll = dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   16  \|        9      \|   52.63 %  \|") | oh;
-    - pwsh: $ll = dotnet ./minicover/src/MiniCover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   19  \|        10      \|   52\.\d+ %  \|"); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover fix coverage" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
+    - pwsh: $ll = dotnet ./minicover/src/MiniCover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, $env:regex); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover fix coverage" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
     #- dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll coverallreport --id %APPVEYOR_REPO_COMMIT% --servicename appveyor --output coverall.json --job %APPVEYOR_BUILD_NUMBER% --token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --post https://coveralls.io/api/v1/jobs --threshold 50 --msg "%APPVEYOR_REPO_COMMIT_MESSAGE%" 
     - pwsh: dotnet ./minicover/src/MiniCover/out2/dotnet-minicover.dll coverallsreport --commit $env:APPVEYOR_REPO_COMMIT --service-name appveyor --output coverall.json --service-job-id $env:APPVEYOR_BUILD_NUMBER --repo-token $env:coverall --branch $env:APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "$env:APPVEYOR_REPO_COMMIT_MESSAGE"
    
