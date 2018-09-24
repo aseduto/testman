@@ -8,8 +8,8 @@ namespace depsman
         {
             int n = args.Length;
             
-            if(n > 10)
-                return 9;
+            //if(n > 10)
+              //  return 9;
 
             Func<int> lambda = (() =>
             {
