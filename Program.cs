@@ -9,7 +9,7 @@ namespace depsman
             int n = args.Length;
             
             if(n > 10)
-                return;
+                return 9;
 
             Func<int> lambda = (() =>
             {
