@@ -53,17 +53,15 @@ test_script:
     - git clone https://github.com/lucaslorentz/minicover.git
     - cd minicover
     - dotnet restore
-    - ls ./src
-    - ls ./src/minicover
-    - dotnet publish ./src/minicover/minicover.csproj -o out -c Release
+    - dotnet publish ./src/MiniCover/MiniCover.csproj -o out -c Release
     - cd ..
-    - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll instrument --workdir ./ --assemblies ./out1/**/*.dll --sources *.cs
+    - dotnet ./minicover/src/MiniCover/out/dotnet-minicover.dll instrument --workdir ./ --assemblies ./out1/**/*.dll --sources *.cs
     - dotnet  ./out1/depsman.dll
     - ls
     #- cd tools
     #- dotnet minicover report --workdir ../ --threshold 90
     #- pwsh: ls env: | ? {-Not ($_.name -match 'coverall')}
-    - pwsh: $ll = dotnet ./minicover/src/minicover/out/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   19  \|        10      \|   52.63 %  \|"); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover Master" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
+    - pwsh: $ll = dotnet ./minicover/src/MiniCover/out/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   19  \|        10      \|   52.63 %  \|"); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover Master" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
     #- dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
     - pwsh: $o = "-------------------"; $o | oh
     - pwsh: rm "coverage.*"; rm minicover -force -recurse;
@@ -71,15 +69,15 @@ test_script:
     - cd minicover
     #- git checkout coverall
     - git checkout fix/lambda
-    - dotnet publish ./src/minicover/minicover.csproj -o out2 -c Release
+    - dotnet publish ./src/MiniCover/MiniCover.csproj -o out2 -c Release
     - cd ..
-    - dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll instrument --workdir ./ --assemblies ./out2/**/*.dll --sources *.cs
+    - dotnet ./minicover/src/MiniCover/out2/dotnet-minicover.dll instrument --workdir ./ --assemblies ./out2/**/*.dll --sources *.cs
     - dotnet  ./out2/depsman.dll
     - ls
     #- pwsh: $ll = dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   16  \|        9      \|   52.63 %  \|") | oh;
-    - pwsh: $ll = dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   19  \|        10      \|   52.63 %  \|"); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover fix coverage" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
+    - pwsh: $ll = dotnet ./minicover/src/MiniCover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, "\| Program\.cs \|   19  \|        10      \|   52.63 %  \|"); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover fix coverage" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
     #- dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll coverallreport --id %APPVEYOR_REPO_COMMIT% --servicename appveyor --output coverall.json --job %APPVEYOR_BUILD_NUMBER% --token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --post https://coveralls.io/api/v1/jobs --threshold 50 --msg "%APPVEYOR_REPO_COMMIT_MESSAGE%" 
-    - dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
+    - dotnet ./minicover/src/MiniCover/out2/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
    
 # to disable automatic tests
 #test: off
