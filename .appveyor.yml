@@ -74,7 +74,9 @@ test_script:
     - dotnet  ./out2/depsman.dll
     - ls
     - pwsh: $ll = dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; [System.Text.RegularExpressions.Regex]::IsMatch($ll, "| Program.cs |   16  |       11      |   68.75 %  |") | oh;
-    - dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll coverallreport --id %APPVEYOR_REPO_COMMIT% --servicename appveyor --output coverall.json --job %APPVEYOR_BUILD_NUMBER% --token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --post https://coveralls.io/api/v1/jobs --threshold 50 --msg "%APPVEYOR_REPO_COMMIT_MESSAGE%" 
+    #- dotnet ./minicover/src/minicover/out2/dotnet-minicover.dll coverallreport --id %APPVEYOR_REPO_COMMIT% --servicename appveyor --output coverall.json --job %APPVEYOR_BUILD_NUMBER% --token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --post https://coveralls.io/api/v1/jobs --threshold 50 --msg "%APPVEYOR_REPO_COMMIT_MESSAGE%" 
+    - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
+   
 # to disable automatic tests
 #test: off
 
