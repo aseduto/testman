@@ -53,6 +53,8 @@ test_script:
     - git clone https://github.com/lucaslorentz/minicover.git
     - cd minicover
     - dotnet restore
+    - ls ./src
+    - ls ./src/minicover
     - dotnet publish ./src/minicover/minicover.csproj -o out -c Release
     - cd ..
     - dotnet ./minicover/src/minicover/out/dotnet-minicover.dll instrument --workdir ./ --assemblies ./out1/**/*.dll --sources *.cs
