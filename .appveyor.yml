@@ -10,7 +10,6 @@ image: Ubuntu
 build: off
 
 environment:
-  regex: "\| Program\.cs \|   19  \|       10      \|   52\.\d+\s*%\s*\|"
   coverall:
     secure: 5ek2mNQ+B0FBBBizf4VQnJ5d131L13D8PoMUuujXI9BwMz0yxBR9yxG+iTekt2Ku
 
@@ -62,6 +61,7 @@ test_script:
     #- cd tools
     #- dotnet minicover report --workdir ../ --threshold 90
     #- pwsh: ls env: | ? {-Not ($_.name -match 'coverall')}
+    - pwsh: $env:regex = "\| Program\.cs \|   19  \|       10      \|   52\.\d+\s*%\s*\|"
     - pwsh: $ll = dotnet ./minicover/src/MiniCover/out/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; $r = [System.Text.RegularExpressions.Regex]::IsMatch($ll, $env:regex); $rr = "Failed"; if($r){$rr="Passed";};Add-AppveyorTest -Name "Minicover Master" -Framework "Integration" -FileName "program.cs" -Outcome $rr; 
     #- dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
     - pwsh: $o = "-------------------"; $o | oh
