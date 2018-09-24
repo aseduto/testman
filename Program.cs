@@ -7,6 +7,9 @@ namespace depsman
         static int Main(string[] args)
         {
             int n = args.Length;
+            
+            if(n > 10)
+                return;
 
             Func<int> lambda = (() =>
             {
