@@ -8,8 +8,14 @@ namespace depsman
         {
             int n = args.Length;
             
-            if(n > 10)
+            if(n > 5)
                 return 9;
+
+            if (3 < n)
+            {
+                Console.WriteLine("3 Input");
+                return args.Length;
+            }
 
             Func<int> lambda = (() =>
             {
