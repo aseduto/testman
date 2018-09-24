@@ -198,7 +198,7 @@ before_test:
     - git clone https://github.com/lucaslorentz/minicover.git
     - cd minicover
     #- git checkout coverall
-    - git checkout coveralls
+    #- git checkout coveralls
     - dotnet restore
     - dotnet publish ./src/minicover/minicover.csproj -o out -c Release
     - cd ..
