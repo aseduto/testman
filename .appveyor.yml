@@ -63,6 +63,7 @@ test_script:
     - pwsh: $ll = dotnet ./minicover/src/minicover/out/dotnet-minicover.dll report --workdir ./ --threshold 50; $ll | oh; [System.Text.RegularExpressions.Regex]::IsMatch($ll, "| Program.cs |   16  |       11      |   68.75 %  |") | oh;
     #- dotnet ./minicover/src/minicover/out/dotnet-minicover.dll coverallsreport --commit %APPVEYOR_REPO_COMMIT% --service-name appveyor --output coverall.json --service-job-id %APPVEYOR_BUILD_NUMBER% --repo-token %coverall% --branch %APPVEYOR_REPO_BRANCH% --remote origin --remote-url https://github.com/aseduto/testman.git --commit-message "%APPVEYOR_REPO_COMMIT_MESSAGE%"
     - pwsh: $o = "-------------------"; $o | oh
+    - pwsh: rm "coverage.*"; rm minicover -force -recurse;
     - git clone https://github.com/aseduto/minicover.git
     - cd minicover
     - git checkout coverall
